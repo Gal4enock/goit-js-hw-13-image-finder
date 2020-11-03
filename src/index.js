@@ -3,8 +3,9 @@ import handlebars from 'handlebars';
 import { alert, notice, info, success, error } from '@pnotify/core';
 import getImages from './apiService.js';
 import pars from './tamplates/pars.hbs';
-import '@pnotify/mobile/dist/PNotifyMobile.css';
-import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/PNotify.css';
+// import '@pnotify/core/dist/BrightTheme.css';
+
 import * as basicLightbox from 'basiclightbox';
 import 'basicLightbox/dist/basicLightbox.min.css'
 
@@ -25,6 +26,9 @@ const renderGallery = function () {
   getImages(input)
   .then(arr => {
     arr.forEach(el => galleryList.insertAdjacentHTML('beforeend', pars(el)));
+  })
+  .catch (err => {
+  alert ("Не верный запрос!")
   })
 }
 console.log(window.innerHeight);

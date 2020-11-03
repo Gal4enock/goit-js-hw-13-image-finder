@@ -1,3 +1,6 @@
+import { alert, notice, info, success, error } from '@pnotify/core';
+import '@pnotify/core/dist/PNotify.css';
+
 let page = 0;
 export default async function getImages(input) {
   let word = input.value;
@@ -10,7 +13,12 @@ export default async function getImages(input) {
    
   let response = await fetch(url)
     .then(res => res.json())
-  .then(obj => obj.hits)
+    .then(obj => {
+      if (!obj.hits.length) {
+        alert ("Не верный запрос!")
+      }
+      return obj.hits
+    })
   
   return response
 }
